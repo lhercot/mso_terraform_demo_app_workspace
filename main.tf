@@ -2,8 +2,16 @@ data "terraform_remote_state" "network" {
   backend = "remote"
   config = {
     organization = var.org
-    workspaces {
+    workspaces = {
       name = var.network_workspace
+    }
+  }
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
     }
   }
 }
@@ -31,4 +39,9 @@ module "demo-azure" {
   virtual_network_name = data.terraform_remote_state.network.outputs.virtual_network_name
   vm_resource_group_name = "VMs_WoS_TF-Hybrid_Cloud_VRF_westus"
   net_resource_group_name = data.terraform_remote_state.network.outputs.resource_group_name
+}
+
+provider "aws" {
+  # Configuration options
+  region = "us-west-1"
 }
