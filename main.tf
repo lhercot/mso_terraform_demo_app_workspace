@@ -32,3 +32,14 @@ module "demo-azure" {
   vm_resource_group_name = "VMs_WoS_TF-Hybrid_Cloud_VRF_westus"
   net_resource_group_name = data.terraform_remote_state.network.outputs.resource_group_name
 }
+
+# Deploy VM to AWS site
+module "demo_aws" {
+  source  = "app.terraform.io/cisco-dcn-ecosystem/demo_mso/aws"
+  version = "0.0.2"
+
+  vm_name = "TF-Wordpress-Web"
+  db_ip_address = var.db_ip_address
+  subnet_dn = data.terraform_remote_state.network.outputs.aws_subnet_dn
+  region = data.terraform_remote_state.network.outputs.aws_region
+}
