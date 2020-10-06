@@ -1,10 +1,10 @@
 data "terraform_remote_state" "network" {
   backend = "remote"
-  hostname = "app.terraform.io"
-  organization = var.org
-
-  workspaces {
-    name = var.network_workspace
+  config = {
+    organization = var.org
+    workspaces {
+      name = var.network_workspace
+    }
   }
 }
 
