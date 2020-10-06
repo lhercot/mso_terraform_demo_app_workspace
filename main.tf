@@ -51,7 +51,7 @@ module "demo_aws" {
   source  = "app.terraform.io/cisco-dcn-ecosystem/demo_mso/aws"
   version = "0.0.3"
 
-  vm_name = "TF-Wordpress-Web"
+  vm_name = "TF-Wordpress-Web2"
   db_ip_address = var.db_ip_address
   subnet_dn = data.terraform_remote_state.network.outputs.aws_subnet_dn
   region = data.terraform_remote_state.network.outputs.aws_region
